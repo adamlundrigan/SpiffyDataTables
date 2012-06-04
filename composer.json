@@ -1,0 +1,29 @@
+{
+    "name": "spiffy/spiffy-data-tables",
+    "description": "Zend Framework 2 module that provides jQuery DataTables support.",
+    "type": "library",
+    "keywords": [
+        "module",
+        "zf2"
+    ],
+    "homepage": "http://www.github.com/SpiffyJr/SpiffyDataTables/",
+    "authors": [
+        {
+            "name": "Kyle Spraggs",
+            "email": "theman@spiffyjr.me",
+            "homepage": "http://www.spiffyjr.me/"
+        }
+    ],
+    "require": {
+        "zendframework/zendframework": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "SpiffyDataTables": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}
+
