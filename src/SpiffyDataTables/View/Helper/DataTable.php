@@ -1,27 +1,41 @@
 <?php
 
 namespace SpiffyDataTables\View\Helper;
-use Zend\Json\Encoder,
-	Zend\View\Helper\HtmlElement;
+
+use SpiffyDataTables\Source\Source;
+use Zend\Json\Encoder;
+use Zend\View\Helper\HtmlElement;
 
 class DataTable extends HtmlElement
 {
     protected static $loaded = false;
-    
-	public function __invoke($id, array $attribs = array(), array $dataOpts = array())
-	{
-	    $this->load();
-        $attribs['id'] = $id;
+
+    public function __invoke($id, Source $source, array $attributes = array(), array $dtOptions = array())
+    {
+        $this->load();
         
-        $js = "$('#{$id}').dataTable(";
-        $js.= Encoder::encode($dataOpts);
-        $js.= ");";
+        // dtOptions has the data table final options
+        $columns = $source->getColumns();
         
+        // If the source is server-side then our job is simple
+        $dtOptions['aaData'] = $source->getData();
+
+        // Setup column data
+        foreach ($columns as $column) {
+            $dtOptions['aoColumns'][] = array_merge(array(
+                'sTitle' => $column->getName()
+            ), $column->getAttributes());
+        }
+        
+        $js = sprintf('$("#%s").dataTable(%s);', $id, Encoder::encode($dtOptions));
         $this->view->inlineScript()->appendScript($js);
         
-        return sprintf('<table%s></table>', $this->_htmlAttribs($attribs));
-	}
-    
+        // Force ID attribute.
+        $attributes['id'] = $id;
+        
+        return sprintf('<table%s></table>', $this->_htmlAttribs($attributes));
+    }
+
     protected function load()
     {
         if (self::$loaded) {
