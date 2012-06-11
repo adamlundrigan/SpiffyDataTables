@@ -10,7 +10,8 @@ abstract class AbstractColumn
         'closure'  => 'SpiffyDataTables\Column\Closure',
         'link'     => 'SpiffyDataTables\Column\Link',
         'token'    => 'SpiffyDataTables\Column\Token',
-        'property' => 'SpiffyDataTables\Column\Property'
+        'property' => 'SpiffyDataTables\Column\Property',
+        'text'     => 'SpiffyDataTables\Column\Text',
     );
 
     protected $name;

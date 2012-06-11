@@ -8,6 +8,6 @@ class Link extends Token
     {
         $label = isset($this->config['label']) ? $this->config['label'] : $this->getName();
 
-        return sprintf('<a href="%s">%s</a>', parent::parse($data), $this->getName());
+        return sprintf('<a href="%s">%s</a>', parent::parse($data), $label);
     }
 }
