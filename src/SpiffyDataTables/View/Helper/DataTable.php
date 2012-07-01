@@ -4,9 +4,9 @@ namespace SpiffyDataTables\View\Helper;
 
 use SpiffyDataTables\Source\Source;
 use Zend\Json\Encoder;
-use Zend\View\Helper\HtmlElement;
+use Zend\View\Helper\AbstractHtmlElement;
 
-class DataTable extends HtmlElement
+class DataTable extends AbstractHtmlElement
 {
     protected static $loaded = false;
 
