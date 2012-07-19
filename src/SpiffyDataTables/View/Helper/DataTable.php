@@ -42,7 +42,12 @@ class DataTable extends AbstractHtmlElement
             return;
         }
         
-        $this->view->inlineScript()->appendFile('/js/SpiffyDataTables/jquery.dataTables.min.js');
+        $view = $this->getView();
+        $dtScript = '/js/SpiffyDataTables/jquery.dataTables.min.js';
+        if (method_exists($view, 'plugin') && $view->plugin('basepath')) {
+            $dtScript = $view->basepath($dtScript);
+        }
+        $this->view->inlineScript()->appendFile($dtScript);
         
         self::$loaded = true;
     }
