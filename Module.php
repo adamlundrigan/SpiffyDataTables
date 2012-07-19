@@ -9,6 +9,15 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
+    public function getViewHelperConfiguration()
+    {
+        return array(
+            'invokables' => array(
+                'datatable' => 'SpiffyDataTables\View\Helper\DataTable',
+            ),
+        );
+    }
+
     public function getAutoloaderConfig()
     {
         return array(
